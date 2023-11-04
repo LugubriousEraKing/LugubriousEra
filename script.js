@@ -3,16 +3,21 @@
 // Initialize Netlify Identity
 netlifyIdentity.init();
 
+// Function to display a message on the page
+function displayMessage(message, color) {
+    const messageElement = document.getElementById('message');
+    messageElement.textContent = message;
+    messageElement.style.color = color;
+}
+
 // Function to handle a successful registration
 function registrationSuccess(user) {
-    alert('Registration successful!'); // Display a success message
-    // You can redirect to a success page or add more functionality here
+    displayMessage('Registration successful! You are now logged in.', 'green');
 }
 
 // Function to handle a successful login
 function loginSuccess(user) {
-    alert('Login successful!'); // Display a success message
-    // You can redirect to a success page or add more functionality here
+    displayMessage('Login successful! Welcome back.', 'green');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -27,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById('login-password').value;
         netlifyIdentity.login(email, password)
             .then(user => loginSuccess(user)) // Handle successful login
-            .catch(error => alert('Login failed: ' + error)); // Handle login failure
+            .catch(error => displayMessage('Login failed: ' + error, 'red')); // Handle login failure
     });
 
     // Add an event listener for the registration form
@@ -37,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById('registration-password').value;
         netlifyIdentity.signup(email, password)
             .then(user => registrationSuccess(user)) // Handle successful registration
-            .catch(error => alert('Registration failed: ' + error)); // Handle registration failure
+            .catch(error => displayMessage('Registration failed: ' + error, 'red')); // Handle registration failure
     });
 
     // Add an event listener for the "Forgot Your Password" button
