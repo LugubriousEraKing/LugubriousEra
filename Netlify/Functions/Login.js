@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const storeUserDataUrl = 'storeuserdata.js';
+const storeUserDataUrl = '/.netlify/functions/storeuserdata'; // Corrected URL
 
 exports.handler = async (event, context) => {
   try {
@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     // Assuming you have successfully authenticated the user
     const user = event.clientContext.user;
 
-    // Create a user document in FaunaDB
+    // Make a POST request to storeuserdata function
     const response = await fetch(storeUserDataUrl, {
       method: 'POST',
       headers: {
@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
     if (response.ok) {
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: 'Login successful!', userData: {} }),
+        body: JSON.stringify({ message: 'Login successful!', userData: user.user_metadata.userData }),
       };
     } else {
       return {
