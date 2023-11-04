@@ -1,9 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Your Idle Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Include Netlify Identity JavaScript library -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        /* Default styling for forms and buttons (can be customized later) */
+        form {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f7f7f7;
+        }
+
+        input {
+            margin: 5px 0;
+            padding: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,7 +37,54 @@
         <div id="game-container">
             <!-- Game elements will go here -->
         </div>
-    </main>
-    <script src="script.js"></script>
 
-</body></html>
+        <!-- Registration Form -->
+        <h2>Register</h2>
+        <form id="registration-form">
+            <input type="email" id="registration-email" placeholder="Email" required>
+            <input type="password" id="registration-password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Login Form -->
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Forgot Password Button -->
+        <button id="forgot-password-button">Forgot Password</button>
+    </main>
+
+    <script src="script.js"></script>
+    
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('registration-email').value;
+            const password = document.getElementById('registration-password').value;
+            netlifyIdentity.signup(email, password, (user) => {
+                // Handle successful registration
+                console.log('Registration success:', user);
+            });
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            netlifyIdentity.login(email, password, (user) => {
+                // Handle successful login
+                console.log('Login success:', user);
+            });
+        });
+
+        document.getElementById('forgot-password-button').addEventListener('click', function() {
+            // Open the password recovery modal
+            netlifyIdentity.open('recover');
+        });
+    </script>
+</body>
+</html>
