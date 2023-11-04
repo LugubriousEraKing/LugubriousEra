@@ -36,6 +36,16 @@
         document.getElementById('login-button').addEventListener('click', () => {
             netlifyIdentity.open('login');
         });
+
+        // Handle login status changes
+        netlifyIdentity.on('login', (user) => {
+            // Once the user logs in, you can load the user's game data here.
+            // Make API requests to your Netlify functions to fetch and display the data.
+        });
+
+        netlifyIdentity.on('logout', () => {
+            // Handle logout, if needed.
+        });
     </script>
 </body>
 </html>
