@@ -10,7 +10,9 @@ exports.handler = async (event, context) => {
 
     // Define user data, e.g., character inventory or any user-specific data
     const userData = {
-      // User-specific data
+      // User-specific data, e.g., inventory, experience, etc.
+      inventory: [],
+      experience: 0,
     };
 
     // Check if the user document already exists
@@ -38,10 +40,9 @@ exports.handler = async (event, context) => {
       };
     } else {
       // User document already exists, you can update it if needed
-      // Example:
-      // const result = await client.query(
-      //   q.Update(existingUser.ref, { data: { userData: userData } })
-      // );
+      const result = await client.query(
+        q.Update(existingUser.ref, { data: { userData: userData } })
+      );
 
       return {
         statusCode: 200,
