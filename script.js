@@ -1,51 +1,39 @@
-<html>
-<head>
-</head>
-<body>
-<script type="text/javascript" id="dcoder_script">
-    // JavaScript code for your idle game
-
-    // Initialize game variables
-    let score = 0;
-
-    // Function to increment the score
-    function incrementScore() {
-        score += 1;
-        updateScore();
-    }
-
-    // Function to update the score on the webpage
-    function updateScore() {
-        const scoreElement = document.getElementById("score");
-        scoreElement.textContent = `Score: ${score}`;
-    }
-
-    // Function to handle a successful registration
-    function registrationSuccess() {
-        // Display a success message
-        alert('Registration successful!');
-
+document.getElementById('registration-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.getElementById('registration-email').value;
+    const password = document.getElementById('registration-password').value;
+    
+    netlifyIdentity.signup(email, password, (user) => {
+        // Handle successful registration
+        const message = document.getElementById('registration-message');
+        message.textContent = 'Registration success: ' + user.email;
+        message.style.color = 'green';
         // Redirect to the registration success page
         window.location.href = 'registration_success.html';
-    }
+    }).catch((error) => {
+        // Handle registration failure
+        const message = document.getElementById('registration-message');
+        message.textContent = 'Registration failed: ' + error;
+        message.style.color = 'red';
+    });
+});
 
-    // Function to handle a successful login
-    function loginSuccess() {
-        // Display a success message
-        alert('Login successful!');
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
 
+    netlifyIdentity.login(email, password, (user) => {
+        // Handle successful login
+        const message = document.getElementById('login-message');
+        message.textContent = 'Login success: ' + user.email;
+        message.style.color = 'green';
         // Redirect to the login success page
         window.location.href = 'success.html';
-    }
-
-    // Add an event listener for a button click to increment the score
-    const button = document.getElementById("click-button");
-    button.addEventListener("click", () => {
-        incrementScore();
+    }).catch((error) => {
+        // Handle login failure
+        const message = document.getElementById('login-message');
+        message.textContent = 'Login failed: ' + error;
+        message.style.color = 'red';
     });
-
-    // Call the updateScore function to display the initial score
-    updateScore();
-</script>
-</body>
-</html>
+});
