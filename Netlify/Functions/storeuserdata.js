@@ -19,10 +19,10 @@ exports.handler = async (event, context) => {
     );
 
     if (!existingUser) {
-      // If the user document doesn't exist, create it
+      // If the user document doesn't exist, create it in the 'users' collection
       const result = await client.query(
         q.Create(
-          q.Collection('user_data'),
+          q.Collection('users'),
           {
             data: {
               userId: userId,
