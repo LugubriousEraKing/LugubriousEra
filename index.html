@@ -6,28 +6,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- Include Netlify Identity JavaScript library -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <style>
-        /* Default styling for forms and buttons (can be customized later) */
-        form {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f7f7f7;
-        }
-
-        input {
-            margin: 5px 0;
-            padding: 5px;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -51,7 +29,7 @@
         <h2>Login</h2>
         <form id="login-form">
             <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Password" required>
+            <input type="password" id "login-password" placeholder="Password" required>
             <button type="submit">Login</button>
             <p id="login-message"></p>
         </form>
@@ -60,8 +38,6 @@
         <button id="forgot-password-button">Forgot Password</button>
     </main>
 
-    <script src="script.js"></script>
-    
     <script>
         document.getElementById('registration-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -70,7 +46,7 @@
             netlifyIdentity.signup(email, password, (user) => {
                 // Handle successful registration
                 const message = document.getElementById('registration-message');
-                message.textContent = 'Registration success. You can now login.';
+                message.textContent = 'Registration success: ' + user.email;
                 message.style.color = 'green';
             }).catch((error) => {
                 // Handle registration failure
@@ -87,12 +63,8 @@
             netlifyIdentity.login(email, password, (user) => {
                 // Handle successful login
                 const message = document.getElementById('login-message');
-                message.textContent = 'Login success. Redirecting...';
+                message.textContent = 'Login success: ' + user.email;
                 message.style.color = 'green';
-                setTimeout(() => {
-                    // Redirect or perform any other actions after login
-                    window.location.href = 'dashboard.html';
-                }, 2000); // Redirect after 2 seconds
             }).catch((error) => {
                 // Handle login failure
                 const message = document.getElementById('login-message');
