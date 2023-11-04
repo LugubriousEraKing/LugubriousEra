@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>LugubriousEra - Game Website</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <header>
@@ -23,15 +24,18 @@
     </footer>
     <div class="login-form">
         <h2>Login</h2>
-        <form action="/login" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
-            <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account? <a href="/register">Register here</a></p>
-        <p><a href="/forgot-password">Forgot your password?</a></p>
+        <button id="login-button">Login with Netlify</button>
     </div>
+
+    <script>
+        // Initialize Netlify Identity
+        const netlifyIdentity = window.netlifyIdentity;
+        netlifyIdentity.init();
+
+        // Add event listener to the login button
+        document.getElementById('login-button').addEventListener('click', () => {
+            netlifyIdentity.open('login');
+        });
+    </script>
 </body>
 </html>
