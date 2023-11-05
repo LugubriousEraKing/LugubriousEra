@@ -41,6 +41,9 @@
         netlifyIdentity.on('login', (user) => {
             // Once the user logs in, you can load the user's game data here.
             // Make API requests to your Netlify functions to fetch and display the data.
+            
+            // Redirect to the inventory page upon successful login
+            window.location.href = '/inventory.html';
         });
 
         netlifyIdentity.on('logout', () => {
