@@ -37,14 +37,11 @@ function addToInventory(itemId, quantity) {
 
 // Simulate loading inventory items (replace this with actual data retrieval logic)
 function loadInventoryItems() {
-    const items = [
-        { id: 1, quantity: 1 },
-        { id: 2, quantity: 3 },
-        { id: 1, quantity: 2 }, // Simulate multiple items with the same ID
-    ];
+    // Parse the inventory data provided by your server
+    const items = JSON.parse(`<<YOUR_INVENTORY_DATA>>`);
 
     items.forEach((item) => {
-        addToInventory(item.id, item.quantity);
+        addToInventory(item.itemId, item.quantity);
     });
 }
 
