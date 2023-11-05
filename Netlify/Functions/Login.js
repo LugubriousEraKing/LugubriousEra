@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const storeUserDataUrl = '/.netlify/functions/storeuserdata'; // Corrected URL
+const storeUserDataUrl = '/.netlify/functions/storeuserdata';
 
 exports.handler = async (event, context) => {
   try {
@@ -21,9 +21,10 @@ exports.handler = async (event, context) => {
     });
 
     if (response.ok) {
+      // Redirect to the inventory page upon successful login
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: 'Login successful!', userData: user.user_metadata.userData }),
+        body: JSON.stringify({ message: 'Login successful!', redirectTo: '/inventory.html' }),
       };
     } else {
       return {
