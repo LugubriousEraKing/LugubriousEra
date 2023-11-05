@@ -1,7 +1,32 @@
 /* inventory.css */
 .equipment {
-    /* Add your styles for equipment slots here */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Adjust as needed */
+    gap: 10px;
 }
+
+.equipment-slot {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border: 2px solid #ccc; /* Border for the slot */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
 .inventory {
-    /* Add your styles for inventory slots here */
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Adjust as needed */
+    gap: 10px;
+}
+
+.inventory-slot {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border: 2px solid #ccc; /* Border for the slot */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
