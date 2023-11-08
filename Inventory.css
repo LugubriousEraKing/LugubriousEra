@@ -1,14 +1,14 @@
 /* inventory.css */
 .equipment {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Adjust as needed */
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
 .equipment-slot {
-    width: 100px; /* Adjust as needed */
-    height: 100px; /* Adjust as needed */
-    border: 2px solid #ccc; /* Border for the slot */
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ccc;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,14 +17,14 @@
 
 .inventory {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Adjust as needed */
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
 }
 
 .inventory-slot {
-    width: 100px; /* Adjust as needed */
-    height: 100px; /* Adjust as needed */
-    border: 2px solid #ccc; /* Border for the slot */
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ccc;
     display: flex;
     align-items: center;
     justify-content: center;
