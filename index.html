@@ -30,25 +30,32 @@
     <script>
         // Initialize Netlify Identity
         const netlifyIdentity = window.netlifyIdentity;
-        netlifyIdentity.init();
-
-        // Add event listener to the login button
-        document.getElementById('login-button').addEventListener('click', () => {
-            netlifyIdentity.open('login');
-        });
-
-        // Handle login status changes
-        netlifyIdentity.on('login', (user) => {
-            // Once the user logs in, you can load the user's game data here.
-            // Make API requests to your Netlify functions to fetch and display the data.
+        if (netlifyIdentity) {
+            netlifyIdentity.init();
             
-            // Redirect to the inventory page upon successful login
-            window.location.href = '/inventory.html';
-        });
+            // Add event listener to the login button
+            const loginButton = document.getElementById('login-button');
+            if (loginButton) {
+                loginButton.addEventListener('click', () => {
+                    netlifyIdentity.open('login');
+                });
+            }
 
-        netlifyIdentity.on('logout', () => {
-            // Handle logout, if needed.
-        });
+            // Handle login status changes
+            netlifyIdentity.on('login', (user) => {
+                // Once the user logs in, you can load the user's game data here.
+                // Make API requests to your Netlify functions to fetch and display the data.
+                
+                // Redirect to the inventory page upon successful login
+                window.location.href = '/inventory.html';
+            });
+
+            netlifyIdentity.on('logout', () => {
+                // Handle logout, if needed.
+            });
+        } else {
+            console.error('Netlify Identity library not found. Ensure it is properly included.');
+        }
     </script>
 </body>
 </html>
