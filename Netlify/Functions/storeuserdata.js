@@ -1,54 +1,38 @@
 const faunadb = require('faunadb');
 const q = faunadb.query;
 
-const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET_KEY });
+const client = new faunadb.Client({
+  secret: 'fnAFR8uT40AAQI6-EBHvPqPCI-_pcH1xNV4RkTIo',
+  domain: 'db.fauna.com',
+  scheme: 'https',
+});
 
 exports.handler = async (event, context) => {
   try {
     const user = event.clientContext.user;
-    const userId = user.sub; // Assuming user.sub is the unique user identifier from Netlify Identity
+    const userId = user.sub;
 
-    // Define user data, e.g., character inventory or any user-specific data
     const userData = {
-      // User-specific data, e.g., inventory, experience, etc.
       inventory: [],
       experience: 0,
     };
 
-    // Check if the user document already exists
-    const existingUser = await client.query(
-      q.Get(q.Match(q.Index('user_by_id'), userId))
+    const result = await client.query(
+      q.Create(
+        q.Collection('users'),
+        {
+          data: {
+            userId: userId,
+            userData: userData,
+          },
+        }
+      )
     );
 
-    if (!existingUser) {
-      // If the user document doesn't exist, create it in the 'users' collection
-      const result = await client.query(
-        q.Create(
-          q.Collection('users'),
-          {
-            data: {
-              userId: userId,
-              userData: userData,
-            },
-          }
-        )
-      );
-
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: 'User data stored successfully', result }),
-      };
-    } else {
-      // User document already exists, you can update it if needed
-      const result = await client.query(
-        q.Update(existingUser.ref, { data: { userData: userData } })
-      );
-
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: 'User data updated successfully', result: existingUser }),
-      };
-    }
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'User data stored successfully', result }),
+    };
   } catch (error) {
     return {
       statusCode: 500,
