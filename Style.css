@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+}
+
+#book-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+#status-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.book {
+  margin-bottom: 20px;
+}
+
+.book h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.book img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
